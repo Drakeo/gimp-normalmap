@@ -1,22 +1,22 @@
 /*
-   normalmap GIMP plugin
+	normalmap GIMP plugin
 
-   Copyright (C) 2002-2012 Shawn Kirst <skirst@gmail.com>
+	Copyright (C) 2002-2008 Shawn Kirst <skirst@insightbb.com>
 
-   This program is free software; you can redistribute it and/or
-   modify it under the terms of the GNU General Public
-   License as published by the Free Software Foundation; either
-   version 2 of the License, or (at your option) any later version.
+	This program is free software; you can redistribute it and/or
+	modify it under the terms of the GNU General Public
+	License as published by the Free Software Foundation; either
+	version 2 of the License, or (at your option) any later version.
 
-   This program is distributed in the hope that it will be useful,
-   but WITHOUT ANY WARRANTY; without even the implied warranty of
-   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-   General Public License for more details.
+	This program is distributed in the hope that it will be useful,
+	but WITHOUT ANY WARRANTY; without even the implied warranty of
+	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+	General Public License for more details.
 
-   You should have received a copy of the GNU General Public License
-   along with this program; see the file COPYING.  If not, write to
-   the Free Software Foundation, 51 Franklin Street, Fifth Floor,
-   Boston, MA 02110-1301 USA.
+	You should have received a copy of the GNU General Public License
+	along with this program; see the file COPYING.  If not, write to
+	the Free Software Foundation, Inc., 59 Temple Place - Suite 330,
+	Boston, MA 02111-1307, USA.
 */
 
 #include "scale.h"
@@ -29,7 +29,7 @@ void scale_pixels(unsigned char *dst, int dw, int dh,
    int a, b, c, d;
    int dstride = dw * bpp;
    unsigned char *s;
-
+   
    for(y = 0; y < dh; ++y)
    {
       if(dh > 1)
@@ -41,7 +41,7 @@ void scale_pixels(unsigned char *dst, int dw, int dh,
       }
       else
          iy = wy = 0;
-
+      
       for(x = 0; x < dw; ++x)
       {
          if(dw > 1)
@@ -53,9 +53,9 @@ void scale_pixels(unsigned char *dst, int dw, int dh,
          }
          else
             ix = wx = 0;
-
+         
          s = src + ((iy - 1) * sw + (ix - 1)) * bpp;
-
+         
          for(n = 0; n < bpp; ++n)
          {
             b = icerp(s[(sw + 0) * bpp],
@@ -71,7 +71,7 @@ void scale_pixels(unsigned char *dst, int dw, int dh,
             }
             else
                a = b;
-
+            
             c = icerp(s[(2 * sw + 0) * bpp],
                       s[(2 * sw + 1) * bpp],
                       s[(2 * sw + 2) * bpp],
@@ -85,7 +85,7 @@ void scale_pixels(unsigned char *dst, int dw, int dh,
             }
             else
                d = c;
-
+            
             v = icerp(a, b, c, d, wy);
             if(v < 0) v = 0;
             if(v > 255) v = 255;
